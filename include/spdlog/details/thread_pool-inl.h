@@ -13,7 +13,7 @@
 namespace spdlog {
 namespace details {
 
-SPDLOG_INLINE void thread_pool::set_thread_name(const char * name)
+SPDLOG_INLINE void thread_pool::set_thread_names(const char * name)
 {
 #if defined(__GLIBC__) && !defined(__UCLIBC__) && !defined(__MUSL__)
   for (auto &t : threads_)
