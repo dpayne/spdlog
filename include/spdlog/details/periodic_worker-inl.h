@@ -10,6 +10,13 @@
 namespace spdlog {
 namespace details {
 
+SPDLOG_INLINE void periodic_worker::set_thread_name(const char * name)
+{
+#if defined(__GLIBC__) && !defined(__UCLIBC__) && !defined(__MUSL__)
+  pthread_setname_np(worker_thread_.native_handle(), name);
+#endif
+}
+
 SPDLOG_INLINE periodic_worker::periodic_worker(const std::function<void()> &callback_fun, std::chrono::seconds interval)
 {
     active_ = (interval > std::chrono::seconds::zero());

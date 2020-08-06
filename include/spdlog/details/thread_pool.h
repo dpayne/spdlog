@@ -97,6 +97,7 @@ public:
     void post_log(async_logger_ptr &&worker_ptr, const details::log_msg &msg, async_overflow_policy overflow_policy);
     void post_flush(async_logger_ptr &&worker_ptr, async_overflow_policy overflow_policy);
     size_t overrun_counter();
+    void set_thread_name(const char *name);
 
 private:
     q_type q_;

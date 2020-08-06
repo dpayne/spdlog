@@ -26,6 +26,8 @@ public:
     // stop the worker thread and join it
     ~periodic_worker();
 
+    void set_thread_name(const char * name);
+
 private:
     bool active_;
     std::thread worker_thread_;

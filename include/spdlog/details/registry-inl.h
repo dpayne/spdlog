@@ -184,6 +184,11 @@ SPDLOG_INLINE void registry::flush_on(level::level_enum log_level)
     flush_level_ = log_level;
 }
 
+SPDLOG_INLINE void registry::set_periodic_flusher_thread_name(const char *name)
+{
+    return periodic_flusher_->set_thread_name(name);
+}
+
 SPDLOG_INLINE void registry::flush_every(std::chrono::seconds interval)
 {
     std::lock_guard<std::mutex> lock(flusher_mutex_);

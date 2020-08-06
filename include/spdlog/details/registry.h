@@ -82,6 +82,8 @@ public:
 
     void update_levels(cfg::log_levels levels);
 
+    void set_periodic_flusher_thread_name(const char *);
+
     static registry &instance();
 
 private:
