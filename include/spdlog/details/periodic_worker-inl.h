@@ -31,7 +31,9 @@ SPDLOG_INLINE periodic_worker::periodic_worker(const std::function<void()> &call
     worker_thread_ = std::thread([this, callback_fun, interval]() {
         for (;;)
         {
+#if defined(__GLIBC__) && !defined(__UCLIBC__) && !defined(__MUSL__)
             pthread_setname_np(worker_thread_.native_handle(), g_thread_name);
+#endif
             std::unique_lock<std::mutex> lock(this->mutex_);
             if (this->cv_.wait_for(lock, interval, [this] { return !this->active_; }))
             {
